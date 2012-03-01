@@ -9,9 +9,9 @@ public class HashTestMainTest
   @Test
   public void test_shouldGenerateMD5Hash(){
       System.out.println("Should Generate a hash using MD5 ...");
-      HashTestMain mainHash = new HashTestMain();
+      HashGenerator mainHash = new HashGenerator();
       String strTest = "Teste de string";
-      String response = mainHash.getMD5Hash(strTest);
+      String response = mainHash.generateHash(strTest, HashGenerator.ALGO_MD5);
       assertNotNull(response);
       assertTrue(response.length() == 24);
   }
@@ -19,15 +19,30 @@ public class HashTestMainTest
   @Test
   public void test_shouldGenerateSHAHash(){
     System.out.println("Should Generate Hash Using SHA ...");
-    HashTestMain mainHash = new HashTestMain();
+    HashGenerator mainHash = new HashGenerator();
     String strTest = "Teste de String";
-    String response = mainHash.getSHAHash(strTest);
+    String response = mainHash.generateHash(strTest, HashGenerator.ALGO_SHA);
     assertNotNull(response);
+    assertTrue(response.length() == 28);
   }
 
-  // @Test
-  // public void test_shouldFail(){
-  //     System.out.println("Should fail the teste ...");
-  //     assertTrue(false);
-  // }
+  @Test
+  public void test_shouldGenerateSHA1Hash(){
+    System.out.println("Should Generate Hash Using SHA 1 ...");
+    HashGenerator mainHash = new HashGenerator();
+    String strTest = "Teste de String";
+    String response = mainHash.generateHash(strTest, HashGenerator.ALGO_SHA1);
+    assertNotNull(response);
+    assertTrue(response.length() == 28);
+  }
+
+  @Test
+  public void test_shouldGenerateTigerHash(){
+    System.out.println("Should Generate Hash Using TIGER ...");
+    HashGenerator mainHash = new HashGenerator();
+    String strTest = "Teste de String";
+    String response = mainHash.generateHash(strTest, HashGenerator.ALGO_TIGER);
+    assertNotNull(response);
+    assertTrue(response.length() == 32);
+  }
 }

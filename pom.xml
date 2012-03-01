@@ -16,11 +16,30 @@
 
   <repositories>
     <repository>
-      <id>BouncyCastrle Repository on Maven2</id>
+      <id>BouncyCastle Repository on Maven2</id>
       <name>Maven Repo 2</name>
       <url>http://repo2.maven.org/maven2/org/</url>
     </repository>
   </repositories>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <configuration>
+          <archive>
+            <manifest>
+              <mainClass>br.com.esec.estudo.hashes.HashGenerator</mainClass>
+              <packageName>br.com.esec.estudo.hashes</packageName>
+              <addClasspath>true</addClasspath>
+              <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+            </manifest>
+          </archive>
+        </configuration>
+      </plugin>
+  </plugins>
+</build>
 
   <dependencies>
     <dependency>
