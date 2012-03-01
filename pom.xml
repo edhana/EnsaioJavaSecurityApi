@@ -32,8 +32,6 @@
             <manifest>
               <mainClass>br.com.esec.estudo.hashes.HashGenerator</mainClass>
               <packageName>br.com.esec.estudo.hashes</packageName>
-              <addClasspath>true</addClasspath>
-              <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
             </manifest>
           </archive>
         </configuration>

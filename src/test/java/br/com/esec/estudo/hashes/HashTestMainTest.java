@@ -8,7 +8,7 @@ public class HashTestMainTest
 {
   @Test
   public void test_shouldGenerateMD5Hash(){
-      System.out.println("Should Generate a hash using MD5 ...");
+      System.out.println("Should Generate Hash using MD5 ...");
       HashGenerator mainHash = new HashGenerator();
       String strTest = "Teste de string";
       String response = mainHash.generateHash(strTest, HashGenerator.ALGO_MD5);
