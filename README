@@ -1,0 +1,6 @@
+Comando (usado na linha de comando) para criar um arquivo com as chaves ( public e privada ) e um certificado autocontido:
+$ openssl req -x509 -nodes -days 365 -newkey rsa:1024 -keyout mycert.pem -out mycert.pem
+
+Gera o arquivo .pfx usando pkcs12
+openssl pkcs12 -export -out mycert.pfx -in mycert.pem -name "Certificado Eduardo Marques pkcs12"
+
