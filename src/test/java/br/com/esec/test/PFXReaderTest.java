@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import br.com.esec.PFXReader;
 
 import java.io.FileNotFoundException;
+import java.security.KeyStore;
 
 public class PFXReaderTest{
 
@@ -35,10 +36,28 @@ public class PFXReaderTest{
 
   @Test
   public void test_shouldGetTheKeyEntryAliasFromFileCert(){
-    System.out.println("Should get the Key Entry Alias from the PFX file ... ");
-    assertEquals("Certificado Eduardo Marques pkcs12",reader.getKeyEntry("openssl/mycert.pfx"));
+    System.out.println("Should get the Key Entry Alias from PFX file ... ");
+
+    try{
+      assertEquals("Certificado Eduardo Marques pkcs12",reader.getKeyEntry(
+        reader.getKeyStore(reader.openPFXFile("openssl/mycert.pfx"))
+        ));
+    }catch(FileNotFoundException e){
+      fail();
+    }
   }
 
-
+  @Test
+  public void test_shouldGetTheCertificateFromPFXFile(){
+    System.out.println("Should get the certificate from PFX file ... ");
+  
+    try{
+      KeyStore ks = reader.getKeyStore(reader.openPFXFile("openssl/mycert.pfx"));
+      String certName = reader.getKeyEntry(ks);
+      assertNotNull(reader.getCertificate(ks, certName));
+    }catch(FileNotFoundException e){
+      fail();
+    }
+  }
 
 }

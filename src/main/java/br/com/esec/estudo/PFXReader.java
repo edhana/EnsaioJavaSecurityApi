@@ -10,6 +10,7 @@ import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
 
 import java.util.Enumeration;
 
@@ -28,6 +29,8 @@ public class PFXReader{
     try{
       if (file != null){
         KeyStore ks = KeyStore.getInstance("PKCS12", "BC");
+        String password = "1234";
+        ks.load(file, password.toCharArray());
         return ks;
       }
       else{
@@ -38,6 +41,12 @@ public class PFXReader{
       System.out.println("====> Excepition: " + e.getMessage()); 
     }catch(NoSuchProviderException e){
       System.out.println("====> Excepition: " + e.getMessage());
+    }catch(IOException e){
+      System.out.println("====> Excepition: " + e.getMessage());
+    }catch(NoSuchAlgorithmException e){
+      System.out.println("====> Excepition: " + e.getMessage());
+    }catch(CertificateException e){
+      System.out.println("====> Excepition: " + e.getMessage());
     }
 
     return null;
@@ -46,23 +55,24 @@ public class PFXReader{
   /**
    * Return the unique alias of a keystore
    */
-  public String getKeyEntry(String filename){
+  public String getKeyEntry(KeyStore ks){
     
     try{
-      InputStream file = openPFXFile(filename);
-      KeyStore ks = getKeyStore(file);
-      String password = "1234";
-      ks.load(file, password.toCharArray());
       Enumeration<String> en = ks.aliases();
       String alias = (String)en.nextElement();
       return alias;
-    }catch(IOException e){
-      System.out.println("====> Excepition: " + e.getMessage());
     }catch(KeyStoreException e){
       System.out.println("====> Excepition: " + e.getMessage());
-    }catch(NoSuchAlgorithmException e){
-      System.out.println("====> Excepition: " + e.getMessage());
-    }catch(CertificateException e){
+    }
+
+    return null;
+  }
+
+  public X509Certificate getCertificate(KeyStore ks, String alias){
+    try{
+      X509Certificate cert = (X509Certificate) ks.getCertificate(alias);
+      return cert;
+    }catch(KeyStoreException e){
       System.out.println("====> Excepition: " + e.getMessage());
     }
 
