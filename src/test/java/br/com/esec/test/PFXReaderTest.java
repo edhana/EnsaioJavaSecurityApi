@@ -33,4 +33,12 @@ public class PFXReaderTest{
     }
   }
 
+  @Test
+  public void test_shouldGetTheKeyEntryAliasFromFileCert(){
+    System.out.println("Should get the Key Entry Alias from the PFX file ... ");
+    assertEquals("Certificado Eduardo Marques pkcs12",reader.getKeyEntry("openssl/mycert.pfx"));
+  }
+
+
+
 }
